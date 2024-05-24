@@ -3,8 +3,8 @@ const context = canvas.getContext('2d');
 
 let gif1 = new Image();
 let gif2 = new Image();
-gif1.src = 'path/to/your/gif1.gif'; // Replace with the actual path to your first GIF
-gif2.src = 'path/to/your/gif2.gif'; // Replace with the actual path to your second GIF
+gif1.src = 'game_start.gif'; // Replace with the actual path to your first GIF
+gif2.src = 'game_click.gif'; // Replace with the actual path to your second GIF
 
 let score = 0;
 let bestScore = 0;
