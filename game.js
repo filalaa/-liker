@@ -69,7 +69,6 @@ function onImageLoad() {
   switchGif(gif1);
 }
 
-
 gif1 = 'game_start.gif'; // Замените на реальный путь к вашему первому GIF
 gif2 = 'game_click.gif'; // Замените на реальный путь к вашему второму GIF
 gifler(gif1).get(onImageLoad);
