@@ -8,6 +8,12 @@
 <body>
   <canvas id="game"></canvas>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gifler/0.1.0/gifler.min.js"></script>
+  <script>
+    // Проверка наличия gifler
+    if (typeof gifler === 'undefined') {
+      console.error('gifler не загружен. Проверьте путь или подключение к интернету.');
+    }
+  </script>
   <script src="game.js"></script>
 </body>
 </html>
