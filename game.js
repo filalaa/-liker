@@ -5,7 +5,6 @@ let gif1, gif2;
 let score = 0;
 let bestScore = 0;
 let lastClickTime = 0;
-let currentGif = null;
 let currentFrames = [];
 let currentFrameIndex = 0;
 let currentFrameDelay = 0;
@@ -55,14 +54,13 @@ function loadGif(gif) {
   fetch(gif)
     .then(response => response.arrayBuffer())
     .then(buffer => {
-      const gif = gifuct.parseGIF(buffer);
-      const frames = gifuct.decompressFrames(gif, true);
-      currentFrames = frames.map(frame => {
-        const imageData = context.createImageData(frame.dims.width, frame.dims.height);
-        imageData.data.set(frame.patch);
+      const gif = new GifReader(new Uint8Array(buffer));
+      currentFrames = Array.from({ length: gif.numFrames() }, (_, i) => {
+        const imageData = context.createImageData(gif.width, gif.height);
+        gif.decodeAndBlitFrameRGBA(i, imageData.data);
         return {
           imageData: imageData,
-          delay: frame.delay
+          delay: gif.frameInfo(i).delay * 10 // Convert delay from centiseconds to milliseconds
         };
       });
       currentFrameIndex = 0;
@@ -88,4 +86,3 @@ function onImageLoad() {
 gif1 = 'game_start.gif'; // Замените на реальный путь к вашему первому GIF
 gif2 = 'game_click.gif'; // Замените на реальный путь к вашему второму GIF
 onImageLoad();
-
